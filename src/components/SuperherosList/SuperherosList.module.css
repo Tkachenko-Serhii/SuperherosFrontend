@@ -1,0 +1,64 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: -10px;
+  margin-left: -10px;
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    margin-bottom: 30px;
+  }
+}
+
+.item {
+  position: relative;
+  list-style: none;
+  width: 275px;
+  flex-basis: calc((100% - 44px) / 4);
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: #e7e7e7;
+  border-radius: 2px;
+  box-shadow: 0px 1px 1px rgba(129, 129, 129, 0.1),
+    0px 2px 4px rgba(129, 129, 129, 0.1), 3px 0px 6px rgba(129, 129, 129, 0.1);
+  transition: transform 250ms linear;
+}
+
+.item:hover,
+.item:focus {
+  transform: scale(1.025);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.06),
+    3px 0px 6px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+}
+
+.superhero_info {
+  padding: 10px 5px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.superhero_title {
+  color: #020101;
+  font-size: 16px;
+}
+
+.superhero {
+  width: 275px;
+  padding: 5px;
+}
+.superhero_img {
+  border-radius: 4px;
+  max-width: 265px;
+  height: 398px;
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  color: #000000;
+}
