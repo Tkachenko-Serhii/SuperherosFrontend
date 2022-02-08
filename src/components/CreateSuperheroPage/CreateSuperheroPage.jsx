@@ -146,6 +146,14 @@ const CreateSuperheroPage = ({ title, btnTitle, id }) => {
               onChange={(e) => setCatchPhrase(e.target.value)}
             />
           </label>
+          <form
+            onSubmit={handleSubmitUpload}
+            className={s.form}
+            encType='multipart/form-data'
+          >
+            <input type='file' name='avatar' />
+            <Button type='submit' title='upload' />
+          </form>
           <Button
             type='submit'
             title={btnTitle}
@@ -155,14 +163,6 @@ const CreateSuperheroPage = ({ title, btnTitle, id }) => {
                 : handleCreateSuperhero
             }
           />
-        </form>
-        <form
-          onSubmit={handleSubmitUpload}
-          className={s.form}
-          encType='multipart/form-data'
-        >
-          <input type='file' name='avatar' />
-          <Button type='submit' title='upload' />
         </form>
       </div>
     </>
