@@ -14,6 +14,7 @@ import {
 import { alert } from "@pnotify/core";
 
 import Loader from "../Loader";
+import Button from "../Button";
 import CreateSuperheroPage from "../CreateSuperheroPage";
 import s from "./SuperheroDetailsPage.module.css";
 
@@ -47,10 +48,7 @@ export default function SuperheroDetailsPage() {
         })}
       {isSuccess && (
         <>
-          <button type='button' className={s.button} onClick={onClickBack}>
-            Back
-          </button>
-
+          <Button type='button' title='back' onClick={onClickBack} />
           <div className={s.container}>
             <div className={s.superhero_img}>
               {data.avatarURL === "" ? (
@@ -73,33 +71,29 @@ export default function SuperheroDetailsPage() {
                 <p className={s.overviev}>{data.superpowers}</p>
                 <p className={s.overviev}>{data.catch_phrase}</p>
               </div>
-              <button
-                className={s.button}
+              <Button
+                type='button'
+                title={isDeleting ? "Deleting..." : "Delete"}
                 onClick={(e) => {
                   deleteSuperhero(data._id);
                   onClickBack();
                 }}
                 disabled={isDeleting}
-              >
-                {isDeleting ? "Deleting..." : "Delete"}
-              </button>
+              />
               <Link
                 to={{
                   pathname: "update",
                 }}
                 state={location.state}
               >
-                <button className={s.button}>Update</button>
+                <Button type='button' title='Update' />
               </Link>
               <Suspense fallback={<Loader />}>
                 <Routes>
                   <Route
                     path='update'
                     element={
-                      <CreateSuperheroPage
-                        btnTitle='update'
-                        id={data._id}
-                      ></CreateSuperheroPage>
+                      <CreateSuperheroPage btnTitle='update' id={data._id} />
                     }
                   />
                 </Routes>

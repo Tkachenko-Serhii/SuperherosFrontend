@@ -2,14 +2,17 @@ import { useState } from "react";
 import {
   useCreateSuperheroMutation,
   useUpdateSuperheroMutation,
+  useUploadAvatarMutation,
 } from "../../redux/superheros/superheroSlice";
 import { alert } from "@pnotify/core";
 import Loader from "../Loader";
+import Button from "../Button";
 import s from "./CreateSuperheroPage.module.css";
 
 const CreateSuperheroPage = ({ title, btnTitle, id }) => {
   const [createSuperhero, { isLoading }] = useCreateSuperheroMutation();
   const [updateSuperhero] = useUpdateSuperheroMutation();
+  const [uploadAvatar] = useUploadAvatarMutation();
 
   const [nickname, setNickname] = useState("");
   const [real_name, setRealName] = useState("");
@@ -77,6 +80,14 @@ const CreateSuperheroPage = ({ title, btnTitle, id }) => {
     }
   };
 
+  const handleSubmitUpload = async (e) => {
+    e.preventDefault();
+    const avatar = e.target.avatar.files[0];
+    const formData = new FormData();
+    formData.append("avatar", avatar, avatar.name);
+    await uploadAvatar({ id }).unwrap();
+  };
+
   return (
     <>
       {isLoading && <Loader />}
@@ -135,22 +146,23 @@ const CreateSuperheroPage = ({ title, btnTitle, id }) => {
               onChange={(e) => setCatchPhrase(e.target.value)}
             />
           </label>
-
-          <label className={s.label}>
-            <input type='file' name='avatarURL' />
-          </label>
-
-          <button
+          <Button
             type='submit'
-            className={s.button}
+            title={btnTitle}
             onClick={
               btnTitle === "update"
                 ? handleUpdateSuperhero
                 : handleCreateSuperhero
             }
-          >
-            {btnTitle}
-          </button>
+          />
+        </form>
+        <form
+          onSubmit={handleSubmitUpload}
+          className={s.form}
+          encType='multipart/form-data'
+        >
+          <input type='file' name='avatar' />
+          <Button type='submit' title='upload' />
         </form>
       </div>
     </>

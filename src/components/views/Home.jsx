@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useFetchSuperherosQuery } from "../../redux/superheros/superheroSlice";
 import SuperherosList from "../SuperherosList";
 import Loader from "../Loader";
-import SetPage from "../SetPage";
+import Button from "../Button";
 import s from "./Home.module.css";
 
 export default function Home() {
@@ -24,10 +24,10 @@ export default function Home() {
       <h1 className={s.title}>SUPERHEROS</h1>
       <SuperherosList superheros={data}></SuperherosList>
       {data.length > 4 && (
-        <>
-          <SetPage onClick={prevPage} title='Prev Page' />
-          <SetPage onClick={nextPage} title='Next Page' />
-        </>
+        <div className={s.btnContainer}>
+          <Button onClick={prevPage} title='Prev Page' type='button' />
+          <Button onClick={nextPage} title='Next Page' type='button' />
+        </div>
       )}
     </>
   );

@@ -4,7 +4,7 @@ export const superheroApi = createApi({
   reducerPath: "superheroApi",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/api/superheros",
+    baseUrl: "http://localhost:3001/api/superheros",
   }),
 
   tagTypes: ["Superheros"],
@@ -38,7 +38,6 @@ export const superheroApi = createApi({
         origin_description,
         superpowers,
         catch_phrase,
-        avatarURL,
       }) {
         return {
           url: "/create",
@@ -49,8 +48,17 @@ export const superheroApi = createApi({
             origin_description,
             superpowers,
             catch_phrase,
-            avatarURL,
           },
+        };
+      },
+      invalidatesTags: ["Superheros"],
+    }),
+
+    uploadAvatar: builder.mutation({
+      query: ({ id }) => {
+        return {
+          url: `${id}/upload`,
+          method: "POST",
         };
       },
       invalidatesTags: ["Superheros"],
@@ -74,5 +82,6 @@ export const {
   useFetchSuperheroByIdQuery,
   useCreateSuperheroMutation,
   useUpdateSuperheroMutation,
+  useUploadAvatarMutation,
   useDeleteSuperheroMutation,
 } = superheroApi;
